@@ -4,6 +4,11 @@ FixerUpper is a secure, coursework-friendly prototype e-commerce website for a h
 
 This project does **not** collect real payments and never stores card details.
 
+## Submission Links
+
+- Live deployment: https://fixerupper-secure-site.vercel.app/
+- GitHub repository: https://github.com/meno4l/fixerupper_secure_site
+
 ## Features
 
 - Responsive product catalogue with images, prices, and add-to-cart actions
