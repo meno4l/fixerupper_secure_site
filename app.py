@@ -39,7 +39,8 @@ def create_app():
         SESSION_COOKIE_SAMESITE="Lax",
         SESSION_COOKIE_SECURE=os.environ.get("FLASK_COOKIE_SECURE") == "1",
     )
-    os.makedirs(app.instance_path, exist_ok=True)
+    if not os.environ.get("VERCEL"):
+        os.makedirs(app.instance_path, exist_ok=True)
     init_app(app)
     ensure_seeded_database(app)
 
