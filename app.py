@@ -4,6 +4,7 @@ import secrets
 import sqlite3
 from datetime import timedelta
 from functools import wraps
+from pathlib import Path
 
 import bcrypt
 from flask import (
@@ -16,7 +17,8 @@ from flask import (
     url_for,
 )
 
-from db import get_db, init_app
+from db import get_db, init_app, init_db
+from sample_data import PRODUCTS, USERS
 
 
 EMAIL_RE = re.compile(r"^[^@\s]+@[^@\s]+\.[^@\s]+$")
@@ -25,9 +27,13 @@ MAX_QUANTITY = 20
 
 def create_app():
     app = Flask(__name__, instance_relative_config=True)
+    database_path = os.environ.get("DATABASE")
+    if database_path is None:
+        database_path = "/tmp/fixerupper.sqlite" if os.environ.get("VERCEL") else os.path.join(app.instance_path, "fixerupper.sqlite")
+
     app.config.from_mapping(
         SECRET_KEY=os.environ.get("SECRET_KEY", "dev-change-this-secret-key"),
-        DATABASE=os.path.join(app.instance_path, "fixerupper.sqlite"),
+        DATABASE=database_path,
         PERMANENT_SESSION_LIFETIME=timedelta(minutes=30),
         SESSION_COOKIE_HTTPONLY=True,
         SESSION_COOKIE_SAMESITE="Lax",
@@ -35,6 +41,7 @@ def create_app():
     )
     os.makedirs(app.instance_path, exist_ok=True)
     init_app(app)
+    ensure_seeded_database(app)
 
     @app.after_request
     def add_security_headers(response):
@@ -341,6 +348,38 @@ def create_app():
         return render_template("order_success.html", order=order, items=items)
 
     return app
+
+
+def ensure_seeded_database(app):
+    db_path = Path(app.config["DATABASE"])
+    if not db_path.exists():
+        init_db(app)
+
+    with app.app_context():
+        db = get_db()
+        try:
+            product_count = db.execute("SELECT COUNT(*) FROM products").fetchone()[0]
+        except sqlite3.OperationalError:
+            init_db(app)
+            product_count = db.execute("SELECT COUNT(*) FROM products").fetchone()[0]
+
+        if product_count:
+            return
+
+        db.executemany(
+            """
+            INSERT INTO products (name, description, price_cents, image_filename, image_url, stock)
+            VALUES (?, ?, ?, ?, ?, ?)
+            """,
+            PRODUCTS,
+        )
+        for name, email, password in USERS:
+            password_hash = bcrypt.hashpw(password.encode("utf-8"), bcrypt.gensalt()).decode("utf-8")
+            db.execute(
+                "INSERT INTO users (name, email, password_hash) VALUES (?, ?, ?)",
+                (name, email, password_hash),
+            )
+        db.commit()
 
 
 def validate_registration(name, email, password):
