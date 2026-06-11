@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Checkout - FixerUpper{% endblock %}
+{% block content %}
+<section class="auth-choice">
+  <div>
+    <p class="eyebrow">Secure checkout</p>
+    <h1>Sign in to confirm your order</h1>
+    <p>Your basket is saved while you log in or create an account. No payment details are requested in this prototype.</p>
+  </div>
+  <div class="choice-actions">
+    <a class="button button-primary" href="{{ url_for('login') }}">Login</a>
+    <a class="button button-secondary" href="{{ url_for('register') }}">Create account</a>
+  </div>
+</section>
+{% endblock %}

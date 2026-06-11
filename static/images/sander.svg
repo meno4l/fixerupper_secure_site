@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" role="img" aria-label="Electric sander">
+  <rect width="640" height="480" fill="#f4f1ea"/>
+  <path d="M155 250c20-86 94-135 185-132 93 3 162 60 178 142l-35 82H180z" fill="#176b5b"/>
+  <rect x="240" y="92" width="178" height="70" rx="28" fill="#25313e"/>
+  <rect x="148" y="336" width="380" height="44" rx="12" fill="#d98a28"/>
+  <circle cx="250" cy="240" r="25" fill="#ffffff" opacity=".75"/>
+</svg>

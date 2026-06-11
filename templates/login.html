@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Login - FixerUpper{% endblock %}
+{% block content %}
+<section class="form-shell">
+  <form class="auth-form" method="post" novalidate>
+    <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+    <h1>Login</h1>
+    <p>Access your account to confirm a saved cart.</p>
+    <div class="field">
+      <label for="email">Email address</label>
+      <input id="email" name="email" type="email" autocomplete="email" value="{{ email or '' }}" required>
+    </div>
+    <div class="field">
+      <label for="password">Password</label>
+      <input id="password" name="password" type="password" autocomplete="current-password" required>
+    </div>
+    <button class="button button-primary full-width" type="submit">Login securely</button>
+    <p class="form-note">Need an account? <a href="{{ url_for('register') }}">Register here</a>.</p>
+  </form>
+</section>
+{% endblock %}

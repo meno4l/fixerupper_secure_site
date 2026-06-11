@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}FixerUpper Catalogue{% endblock %}
+{% block content %}
+<section class="hero">
+  <div class="hero-copy">
+    <p class="eyebrow">Hardware and appliances</p>
+    <h1>FixerUpper</h1>
+    <p>Tools, white goods, and renovation essentials with a secure checkout prototype built for confident browsing.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-heading">
+    <h2>Shop Products</h2>
+    <p>{{ products|length }} products available</p>
+  </div>
+  <div class="product-grid">
+    {% for product in products %}
+      <article class="product-card">
+        <img src="{{ product.image_url or url_for('static', filename='images/' ~ product.image_filename) }}" alt="{{ product.name }}">
+        <div class="product-body">
+          <h3>{{ product.name }}</h3>
+          <p>{{ product.description }}</p>
+          <div class="product-meta">
+            <strong>{{ product.price_cents|currency }}</strong>
+            <span>{{ product.stock }} in stock</span>
+          </div>
+          <form action="{{ url_for('add_to_cart', product_id=product.id) }}" method="post">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+            <button class="button button-primary" type="submit">Add to cart</button>
+          </form>
+        </div>
+      </article>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

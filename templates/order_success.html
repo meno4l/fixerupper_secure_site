@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Order Confirmed - FixerUpper{% endblock %}
+{% block content %}
+<section class="section narrow">
+  <div class="success-panel">
+    <p class="eyebrow">Order #{{ order.id }}</p>
+    <h1>Order confirmed</h1>
+    <p>Thanks, {{ current_user.name }}. Your order has been saved securely for this prototype.</p>
+    <div class="order-review compact">
+      {% for item in items %}
+        <div class="review-line">
+          <span>{{ item.product_name }} x {{ item.quantity }}</span>
+          <strong>{{ (item.unit_price_cents * item.quantity)|currency }}</strong>
+        </div>
+      {% endfor %}
+      <div class="review-total">
+        <span>Total</span>
+        <strong>{{ order.total_cents|currency }}</strong>
+      </div>
+    </div>
+    <a class="button button-primary" href="{{ url_for('catalogue') }}">Continue shopping</a>
+  </div>
+</section>
+{% endblock %}

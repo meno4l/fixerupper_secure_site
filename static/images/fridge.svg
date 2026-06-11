@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" role="img" aria-label="Tall fridge">
+  <rect width="640" height="480" fill="#f4f7f9"/>
+  <rect x="220" y="38" width="210" height="404" rx="24" fill="#ffffff" stroke="#c8d2dc" stroke-width="8"/>
+  <path d="M220 174h210" stroke="#c8d2dc" stroke-width="8"/>
+  <rect x="392" y="90" width="12" height="58" rx="6" fill="#8091a3"/>
+  <rect x="392" y="220" width="12" height="90" rx="6" fill="#8091a3"/>
+  <rect x="252" y="208" width="110" height="32" rx="8" fill="#e9f7f3"/>
+  <rect x="252" y="258" width="110" height="32" rx="8" fill="#e9f7f3"/>
+</svg>

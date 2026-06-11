@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" role="img" aria-label="Circular saw">
+  <rect width="640" height="480" fill="#eef3f2"/>
+  <circle cx="310" cy="270" r="112" fill="#d9e1e8"/>
+  <path d="M310 150l22 78 76-31-48 66 72 38-82 5 12 81-52-63-52 63 12-81-82-5 72-38-48-66 76 31z" fill="#9aa8b4"/>
+  <path d="M170 210c22-72 96-116 178-100 60 12 105 48 134 96H360c-28-22-74-20-106 6z" fill="#176b5b"/>
+  <rect x="390" y="164" width="122" height="54" rx="22" fill="#25313e"/>
+  <rect x="145" y="340" width="330" height="36" rx="12" fill="#d98a28"/>
+</svg>

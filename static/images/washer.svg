@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" role="img" aria-label="Washing machine">
+  <rect width="640" height="480" fill="#eef2f6"/>
+  <rect x="190" y="50" width="260" height="380" rx="24" fill="#ffffff" stroke="#c8d2dc" stroke-width="8"/>
+  <rect x="218" y="82" width="204" height="62" rx="10" fill="#24313d"/>
+  <circle cx="320" cy="270" r="92" fill="#dce9ef" stroke="#557889" stroke-width="14"/>
+  <path d="M258 278c52-42 94 42 145 0 8 58-34 92-82 92-47 0-82-35-63-92z" fill="#6fa6b8"/>
+</svg>

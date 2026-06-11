@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block title %}Your Cart - FixerUpper{% endblock %}
+{% block content %}
+<section class="section narrow">
+  <div class="section-heading">
+    <h1>Your Cart</h1>
+    <p>Update quantities before moving to secure checkout.</p>
+  </div>
+
+  {% if items %}
+    <div class="cart-layout">
+      <div class="cart-lines">
+        {% for item in items %}
+          <article class="cart-line">
+            <img src="{{ item.product.image_url or url_for('static', filename='images/' ~ item.product.image_filename) }}" alt="{{ item.product.name }}">
+            <div>
+              <h2>{{ item.product.name }}</h2>
+              <p>{{ item.product.price_cents|currency }} each</p>
+            </div>
+            <form class="quantity-form" action="{{ url_for('update_cart', product_id=item.product.id) }}" method="post">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+              <label for="quantity-{{ item.product.id }}">Qty</label>
+              <input id="quantity-{{ item.product.id }}" name="quantity" type="number" min="0" max="20" value="{{ item.quantity }}" required>
+              <button class="button button-secondary" type="submit">Update</button>
+            </form>
+            <strong>{{ item.line_total|currency }}</strong>
+            <form action="{{ url_for('remove_from_cart', product_id=item.product.id) }}" method="post">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+              <button class="button button-ghost" type="submit">Remove</button>
+            </form>
+          </article>
+        {% endfor %}
+      </div>
+      <aside class="summary-panel" aria-label="Cart total">
+        <h2>Order Summary</h2>
+        <div class="summary-row">
+          <span>Subtotal</span>
+          <strong>{{ total_cents|currency }}</strong>
+        </div>
+        <div class="summary-row">
+          <span>Payment</span>
+          <span>Not collected</span>
+        </div>
+        <a class="button button-primary full-width" href="{{ url_for('checkout') }}">Proceed to checkout</a>
+      </aside>
+    </div>
+  {% else %}
+    <div class="empty-state">
+      <h2>Your cart is empty</h2>
+      <p>Add a few renovation essentials and they will appear here.</p>
+      <a class="button button-primary" href="{{ url_for('catalogue') }}">Browse catalogue</a>
+    </div>
+  {% endif %}
+</section>
+{% endblock %}

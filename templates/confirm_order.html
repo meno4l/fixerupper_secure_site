@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Confirm Order - FixerUpper{% endblock %}
+{% block content %}
+<section class="section narrow">
+  <div class="section-heading">
+    <h1>Confirm Order</h1>
+    <p>Review your order. This prototype does not collect payment details.</p>
+  </div>
+  <div class="order-review">
+    {% for item in items %}
+      <div class="review-line">
+        <span>{{ item.product.name }} x {{ item.quantity }}</span>
+        <strong>{{ item.line_total|currency }}</strong>
+      </div>
+    {% endfor %}
+    <div class="review-total">
+      <span>Total</span>
+      <strong>{{ total_cents|currency }}</strong>
+    </div>
+    <form method="post">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+      <button class="button button-primary full-width" type="submit">Confirm order</button>
+    </form>
+  </div>
+</section>
+{% endblock %}
