@@ -386,6 +386,8 @@ def ensure_seeded_database(app):
 def validate_registration(name, email, password):
     if not name or len(name) > 80:
         return "Please enter your name using 1 to 80 characters."
+    if re.search(r"[<>]", name):
+        return "Name must not contain HTML characters."
     if not EMAIL_RE.match(email) or len(email) > 120:
         return "Please enter a valid email address."
     if len(password) < 10:

@@ -8,7 +8,7 @@
     <p>Use a strong password. It will be stored only as a bcrypt hash.</p>
     <div class="field">
       <label for="name">Full name</label>
-      <input id="name" name="name" type="text" autocomplete="name" maxlength="80" value="{{ name or '' }}" required>
+      <input id="name" name="name" type="text" autocomplete="name" maxlength="80" pattern="[^<>]+" value="{{ name or '' }}" required>
     </div>
     <div class="field">
       <label for="email">Email address</label>
